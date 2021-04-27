@@ -73,7 +73,7 @@ RCT_EXPORT_METHOD(generateECPair:(nonnull NSDictionary*) options
 
   // Should be the secret invalidated when passcode is removed? If not then use `kSecAttrAccessibleWhenUnlocked`.
   sacObject = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                              kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                              kSecAttrAccessibleAfterFirstUnlock,
 //                                              kSecAccessControlTouchIDAny | kSecAccessControlPrivateKeyUsage,
 //                                              kSecAccessControlUserPresence,
                                               kNilOptions,
@@ -158,7 +158,7 @@ RCT_EXPORT_METHOD(generateECPair:(nonnull NSDictionary*) options
   NSString* base64str = [data base64EncodedStringWithOptions:0];
 
   sacObject = SecAccessControlCreateWithFlags(kCFAllocatorDefault,
-                                              kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly,
+                                              kSecAttrAccessibleAfterFirstUnlock,
                                               0, &sacErr);
 
   status = SecItemAdd((__bridge CFDictionaryRef)@{
